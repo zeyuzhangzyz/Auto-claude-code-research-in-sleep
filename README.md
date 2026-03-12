@@ -43,19 +43,59 @@ The output is a ranked `IDEA_REPORT.md` with hypotheses, pilot results, reviewer
 
 These skills compose into a full research lifecycle. The two workflows can be used independently or chained together:
 
-- **Already have an idea + initial plan?** Jump straight to Workflow 1 (auto review loop)
-- **Exploring a new area (e.g., writing a survey)?** Start with Workflow 2 (idea discovery)
-- **Full pipeline?** Workflow 2 → Workflow 1, from literature survey all the way to submission
+- **Exploring a new area (e.g., writing a survey)?** Start with Workflow 1 (idea discovery)
+- **Already have an idea + initial plan?** Jump straight to Workflow 2 (auto review loop)
+- **Full pipeline?** Workflow 1 → Workflow 2, from literature survey all the way to submission
 
 ### Full Pipeline 🚀
 
 ```
 /research-lit → /idea-creator → /novelty-check → implement → /run-experiment → /auto-review-loop → submit
   (survey)      (brainstorm)    (verify novel)    (code)      (deploy & run)    (review & fix)     (done!)
-  ├──── Workflow 2: Idea Discovery ────┤              ├──────── Workflow 1: Auto Loop ────────┤
+  ├──── Workflow 1: Idea Discovery ────┤              ├──────── Workflow 2: Auto Loop ────────┤
 ```
 
-### Workflow 1: Auto Research Loop 🔁 (sleep & wake up to results)
+### Workflow 1: Literature & Idea Discovery 🔍
+
+> **"What's the state of the art? Where are the gaps?"**
+
+```
+┌─────────────────────────────────────────────────────────────┐
+│                  Idea Discovery                              │
+│                                                              │
+│   /research-lit     /idea-creator     /novelty-check         │
+│   (find papers)     (brainstorm)      (verify novelty)       │
+│         │                │                  │                │
+│         ▼                ▼                  ▼                │
+│   ┌──────────┐     ┌──────────┐       ┌──────────┐         │
+│   │ Search   │────▶│ Generate │──────▶│ Check if │         │
+│   │ arXiv,   │     │ 8-12     │       │ idea is  │         │
+│   │ Scholar  │     │ ideas    │       │ novel    │         │
+│   │ for gaps │     │ + rank   │       │          │         │
+│   └──────────┘     └──────────┘       └──────────┘         │
+│                          │                  │                │
+│                          ▼                  ▼                │
+│                    ┌──────────┐       ┌──────────┐         │
+│                    │ Filter   │──────▶│ External │         │
+│                    │ by cost, │       │ LLM      │         │
+│                    │ novelty  │       │ evaluates│         │
+│                    └──────────┘       └──────────┘         │
+│                                                              │
+│   Typical flow:                                              │
+│   1. /research-lit "discrete diffusion models"               │
+│   2. /idea-creator "DLLMs post training"               │
+│   3. Review ranked ideas, pick top 2-3                       │
+│   4. /novelty-check "top idea" (deep verification)           │
+│   5. /research-review "top idea" (critical feedback)         │
+│   6. Implement → /run-experiment → /auto-review-loop         │
+└─────────────────────────────────────────────────────────────┘
+```
+
+**Skills involved:** `research-lit` + `idea-creator` + `novelty-check` + `research-review`
+
+📝 **Blog post:** [Claude Code 两月 NeurIPS 指北](http://xhslink.com/o/7IvAJQ41IBA)
+
+### Workflow 2: Auto Research Loop 🔁 (sleep & wake up to results)
 
 > **"Review my paper, fix what's wrong, repeat until it's good."**
 
@@ -95,46 +135,6 @@ These skills compose into a full research lifecycle. The two workflows can be us
 - 🔧 **Fix before re-review** — must actually implement fixes before resubmitting; no empty promises
 
 📝 **Blog post:** [开源 | 睡觉 Claude 自动跑实验改文](http://xhslink.com/o/5cBMTDigNXz)
-
-### Workflow 2: Literature & Idea Discovery 🔍
-
-> **"What's the state of the art? Where are the gaps?"**
-
-```
-┌─────────────────────────────────────────────────────────────┐
-│                  Idea Discovery                              │
-│                                                              │
-│   /research-lit     /idea-creator     /novelty-check         │
-│   (find papers)     (brainstorm)      (verify novelty)       │
-│         │                │                  │                │
-│         ▼                ▼                  ▼                │
-│   ┌──────────┐     ┌──────────┐       ┌──────────┐         │
-│   │ Search   │────▶│ Generate │──────▶│ Check if │         │
-│   │ arXiv,   │     │ 8-12     │       │ idea is  │         │
-│   │ Scholar  │     │ ideas    │       │ novel    │         │
-│   │ for gaps │     │ + rank   │       │          │         │
-│   └──────────┘     └──────────┘       └──────────┘         │
-│                          │                  │                │
-│                          ▼                  ▼                │
-│                    ┌──────────┐       ┌──────────┐         │
-│                    │ Filter   │──────▶│ External │         │
-│                    │ by cost, │       │ LLM      │         │
-│                    │ novelty  │       │ evaluates│         │
-│                    └──────────┘       └──────────┘         │
-│                                                              │
-│   Typical flow:                                              │
-│   1. /research-lit "discrete diffusion models"               │
-│   2. /idea-creator "DLLMs post training"               │
-│   3. Review ranked ideas, pick top 2-3                       │
-│   4. /novelty-check "top idea" (deep verification)           │
-│   5. /research-review "top idea" (critical feedback)         │
-│   6. Implement → /run-experiment → /auto-review-loop         │
-└─────────────────────────────────────────────────────────────┘
-```
-
-**Skills involved:** `research-lit` + `idea-creator` + `novelty-check` + `research-review`
-
-📝 **Blog post:** [Claude Code 两月 NeurIPS 指北](http://xhslink.com/o/7IvAJQ41IBA)
 
 ---
 

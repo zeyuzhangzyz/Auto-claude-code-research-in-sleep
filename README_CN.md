@@ -43,19 +43,36 @@
 
 所有 Skills 组成完整科研流水线。两个工作流可以单独使用，也可以串联：
 
-- **已有 idea + 初步方案？** 直接用工作流 1（自动 review 循环）
-- **探索新方向（比如写 survey）？** 从工作流 2 开始（找 idea）
-- **全流程？** 工作流 2 → 工作流 1，从文献调研一路到投稿
+- **探索新方向（比如写 survey）？** 从工作流 1 开始（找 idea）
+- **已有 idea + 初步方案？** 直接用工作流 2（自动 review 循环）
+- **全流程？** 工作流 1 → 工作流 2，从文献调研一路到投稿
 
 ### 完整流程 🚀
 
 ```
 /research-lit → /idea-creator → /novelty-check → 实现 → /run-experiment → /auto-review-loop → 投稿
   (调研文献)      (找idea)       (查新验证)     (写代码)   (部署跑实验)     (自动改到能投)     (搞定!)
-  ├──── 工作流 2：找 Idea ────┤                 ├──────── 工作流 1：自动循环 ────────┤
+  ├──── 工作流 1：找 Idea ────┤                 ├──────── 工作流 2：自动循环 ────────┤
 ```
 
-### 工作流 1：自动科研循环 🔁（睡一觉醒来看结果）
+### 工作流 1：文献调研与找 Idea 🔍
+
+> "这个领域最新进展是什么？哪里有 gap？"
+
+**涉及 Skills：** `research-lit` + `idea-creator` + `novelty-check` + `research-review`
+
+```
+1. /research-lit "discrete diffusion models"    ← 搜论文，整理全景
+2. /idea-creator "DLLMs post training"     ← 自动生成 8-12 个 idea，筛选排序
+3. 选 top 2-3 个 idea
+4. /novelty-check "top idea"                     ← 查新：有没有人做过？
+5. /research-review "top idea"                   ← 让外部 LLM 批判你的想法
+6. 实现 → /run-experiment → /auto-review-loop    ← 闭环！
+```
+
+📝 **博客：** [Claude Code 两月 NeurIPS 指北](http://xhslink.com/o/7IvAJQ41IBA)
+
+### 工作流 2：自动科研循环 🔁（睡一觉醒来看结果）
 
 > "帮我 review 论文，修复问题，循环到通过为止。"
 
@@ -80,23 +97,6 @@
 - 🔧 **先修后审** — 必须实现修复后再重新 review，不能只承诺修
 
 📝 **博客：** [开源 | 睡觉 Claude 自动跑实验改文](http://xhslink.com/o/5cBMTDigNXz)
-
-### 工作流 2：文献调研与找 Idea 🔍
-
-> "这个领域最新进展是什么？哪里有 gap？"
-
-**涉及 Skills：** `research-lit` + `idea-creator` + `novelty-check` + `research-review`
-
-```
-1. /research-lit "discrete diffusion models"    ← 搜论文，整理全景
-2. /idea-creator "DLLMs post training"     ← 自动生成 8-12 个 idea，筛选排序
-3. 选 top 2-3 个 idea
-4. /novelty-check "top idea"                     ← 查新：有没有人做过？
-5. /research-review "top idea"                   ← 让外部 LLM 批判你的想法
-6. 实现 → /run-experiment → /auto-review-loop    ← 闭环！
-```
-
-📝 **博客：** [Claude Code 两月 NeurIPS 指北](http://xhslink.com/o/7IvAJQ41IBA)
 
 ---
 
