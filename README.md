@@ -133,12 +133,14 @@ Domain-specific skills and external projects contributed by the community. PRs w
 |------|------|--------|-------------|-----------|
 | Skill | 🏗️ [`dse-loop`](skills/dse-loop/SKILL.md) | Architecture / EDA | Autonomous design space exploration — iteratively run, analyze, and tune parameters (gem5, Yosys, etc.). Works for any domain with tunable parameters | No |
 | Skill | 🤖 [`idea-discovery-robot`](skills/idea-discovery-robot/SKILL.md) | Robotics / Embodied AI | Workflow 1 adaptation — grounds idea discovery in embodiment, benchmark, sim2real path, and real-robot safety constraints | Yes |
-| External | 🔬 [Auto-Research-Refine](https://github.com/zjYao36/Auto-Research-Refine) | General | Turn a vague idea into an executable research proposal — bridges `/idea-discovery` and `/auto-review-loop`. Claude + GPT-5.4 iterative refinement | Yes |
+| Skill | 🔬 [`research-refine`](skills/research-refine/SKILL.md) | General | Turn a vague idea into a problem-anchored, implementation-oriented method proposal. Best inserted between `/idea-discovery` and `/auto-review-loop` | Yes |
+| Skill | 🧪 [`experiment-plan`](skills/experiment-plan/SKILL.md) | General | Turn a refined proposal into a claim-driven experiment roadmap with ablations, budgets, and run order | No |
+| Skill | 🧭 [`research-refine-pipeline`](skills/research-refine-pipeline/SKILL.md) | General | One-shot chain: `/research-refine` → `/experiment-plan` for method refinement plus experiment planning | Yes |
 | External | 🛡️ [open-source-hardening-skills](https://github.com/zeyuzhangzyz/open-source-hardening-skills) | DevOps / OSS | 10-skill pipeline to harden research code into production-ready open-source projects — audit, refactor, test, CI, docs, review. Pairs with ARIS post-research | Yes |
 | Skill | 📐 [`proof-writer`](skills/proof-writer/SKILL.md) | ML Theory | Rigorous theorem/lemma proof drafting — feasibility triage, dependency maps, honest blockage reports. Pairs with Workflow 3 (`/paper-writing`) for theory sections, or Workflow 2 (`/auto-review-loop`) when reviewers flag proof gaps | No |
 | Docs | 🐾 [OpenClaw Adaptation Guide](docs/OPENCLAW_ADAPTATION.md) | General | Use ARIS workflow methodology in [OpenClaw](https://github.com/All-Hands-AI/OpenHands) — skill-to-stage mapping, file-based orchestration, no Claude Code CLI needed | No |
 
-> **⭐ Highlighted: [Auto-Research-Refine](https://github.com/zjYao36/Auto-Research-Refine)** — Fills the gap between "what to research" and "how to research it". Plug it into the ARIS pipeline:
+> **⭐ Highlighted: [`research-refine`](skills/research-refine/SKILL.md)** — Fills the gap between "what to research" and "how to research it". Plug it into the ARIS pipeline:
 >
 > `/idea-discovery` → **`/research-refine`** → `/auto-review-loop` → `/paper-writing`
 >
@@ -403,6 +405,9 @@ After Workflow 3 generates the paper, `/auto-paper-improvement-loop` runs 2 roun
 | 🚀 [`run-experiment`](skills/run-experiment/SKILL.md) | Deploy experiments to local (MPS/CUDA) or remote GPU servers | No |
 | 🎨 [`pixel-art`](skills/pixel-art/SKILL.md) | Generate pixel art SVG illustrations for READMEs, docs, or slides | No |
 | 🔭 [`idea-discovery`](skills/idea-discovery/SKILL.md) | **Workflow 1 pipeline**: research-lit → idea-creator → novelty-check → research-review | Yes |
+| 🔬 [`research-refine`](skills/research-refine/SKILL.md) | Refine a vague method idea into a problem-anchored, implementation-oriented proposal | Yes |
+| 🧪 [`experiment-plan`](skills/experiment-plan/SKILL.md) | Turn a refined proposal into a claim-driven experiment roadmap with run order and budgets | No |
+| 🧭 [`research-refine-pipeline`](skills/research-refine-pipeline/SKILL.md) | Proposal refinement + experiment planning in one chain: `research-refine` → `experiment-plan` | Yes |
 | 🏗️ [`research-pipeline`](skills/research-pipeline/SKILL.md) | **Full pipeline**: Workflow 1 → implement → Workflow 2 → Workflow 3, from direction to submission | Yes |
 | 📐 [`paper-plan`](skills/paper-plan/SKILL.md) | Generate paper outline with claims-evidence matrix, figure plan, and citation scaffolding | Yes |
 | 📊 [`paper-figure`](skills/paper-figure/SKILL.md) | Publication-quality matplotlib/seaborn plots from experiment data, with LaTeX snippets | Optional |

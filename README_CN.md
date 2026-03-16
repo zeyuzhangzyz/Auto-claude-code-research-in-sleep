@@ -133,12 +133,14 @@ claude
 |------|------|------|------|-----------|
 | Skill | 🏗️ [`dse-loop`](skills/dse-loop/SKILL.md) | 体系结构 / EDA | 自动设计空间探索——迭代运行、分析、调参（gem5、Yosys 等）。适用于任何有可调参数的领域 | 否 |
 | Skill | 🤖 [`idea-discovery-robot`](skills/idea-discovery-robot/SKILL.md) | 机器人 / 具身智能 | 工作流 1 适配版——按 embodiment、benchmark、sim2real 路径和安全约束生成、筛选 idea | 是 |
-| External | 🔬 [Auto-Research-Refine](https://github.com/zjYao36/Auto-Research-Refine) | 通用 | 把模糊 idea 变成可执行研究方案——衔接 `/idea-discovery` 和 `/auto-review-loop`。Claude + GPT-5.4 迭代精炼 | 是 |
+| Skill | 🔬 [`research-refine`](skills/research-refine/SKILL.md) | 通用 | 把模糊 idea 精炼成问题锚点明确、可实现、可评审的方法方案。最适合插在 `/idea-discovery` 和 `/auto-review-loop` 之间 | 是 |
+| Skill | 🧪 [`experiment-plan`](skills/experiment-plan/SKILL.md) | 通用 | 把已定型的方法方案变成 claim-driven 的实验路线图，补齐 ablation、预算和执行顺序 | 否 |
+| Skill | 🧭 [`research-refine-pipeline`](skills/research-refine-pipeline/SKILL.md) | 通用 | 一条龙串联：`/research-refine` → `/experiment-plan`，同时完成方法定型和实验规划 | 是 |
 | External | 🛡️ [open-source-hardening-skills](https://github.com/zeyuzhangzyz/open-source-hardening-skills) | DevOps / 开源 | 10 个 skill 流水线，将研究代码加固为生产级开源项目——审计、重构、测试、CI、文档、review。ARIS 研究完成后的下一步 | 是 |
 | Skill | 📐 [`proof-writer`](skills/proof-writer/SKILL.md) | ML 理论 | 严格的定理/引理证明撰写——可行性分类、依赖图谱、诚实的阻塞报告。搭配工作流 3（`/paper-writing`）写理论章节，或工作流 2（`/auto-review-loop`）修补 reviewer 指出的证明漏洞 | 否 |
 | Docs | 🐾 [OpenClaw 适配指南](docs/OPENCLAW_ADAPTATION.md) | 通用 | 在 [OpenClaw](https://github.com/All-Hands-AI/OpenHands) 中使用 ARIS 工作流方法论——skill 到阶段映射、文件化编排，无需 Claude Code CLI | 否 |
 
-> **⭐ 推荐：[Auto-Research-Refine](https://github.com/zjYao36/Auto-Research-Refine)** — 填补了"研究什么"到"怎么研究"之间的空白。接入 ARIS 流水线：
+> **⭐ 推荐：[`research-refine`](skills/research-refine/SKILL.md)** — 填补了“研究什么”到“怎么研究”之间的空白。接入 ARIS 流水线：
 >
 > `/idea-discovery` → **`/research-refine`** → `/auto-review-loop` → `/paper-writing`
 >
@@ -348,6 +350,9 @@ NARRATIVE_REPORT.md ──► /paper-plan ──► /paper-figure ──► /pap
 | 🚀 [`run-experiment`](skills/run-experiment/SKILL.md) | 部署实验到本地（MPS/CUDA）或远程 GPU 服务器 | 否 |
 | 🎨 [`pixel-art`](skills/pixel-art/SKILL.md) | 生成像素风 SVG 插图，用于 README、文档或幻灯片 | 否 |
 | 🔭 [`idea-discovery`](skills/idea-discovery/SKILL.md) | **工作流 1 全流程**：research-lit → idea-creator → novelty-check → research-review | 是 |
+| 🔬 [`research-refine`](skills/research-refine/SKILL.md) | 把模糊方法想法精炼成问题锚点明确、可实现的研究方案 | 是 |
+| 🧪 [`experiment-plan`](skills/experiment-plan/SKILL.md) | 把 refined proposal 转成 claim-driven 实验路线图，含执行顺序和预算 | 否 |
+| 🧭 [`research-refine-pipeline`](skills/research-refine-pipeline/SKILL.md) | 一条龙完成方法精炼 + 实验规划：`research-refine` → `experiment-plan` | 是 |
 | 🏗️ [`research-pipeline`](skills/research-pipeline/SKILL.md) | **完整流水线**：工作流 1 → 实现 → 工作流 2 → 工作流 3，从方向到投稿 | 是 |
 | 📐 [`paper-plan`](skills/paper-plan/SKILL.md) | 生成论文大纲：claims-evidence 矩阵、图表计划、引用规划 | 是 |
 | 📊 [`paper-figure`](skills/paper-figure/SKILL.md) | 从实验数据生成出版级 matplotlib/seaborn 图表，含 LaTeX 插入代码 | 可选 |
