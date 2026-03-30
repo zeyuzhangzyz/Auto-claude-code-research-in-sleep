@@ -1221,6 +1221,7 @@ Skills are plain Markdown files. Fork and customize:
 | `WANDB` | false | Auto-add W&B logging to experiments | → `experiment-bridge` → `run-experiment` |
 | `CODE_REVIEW` | true | GPT-5.4 reviews experiment code before deployment | → `experiment-bridge` |
 | `BASE_REPO` | false | GitHub repo URL to clone as base codebase for experiments | → `experiment-bridge` |
+| `GPU` | `local` | GPU target: `local`, `remote` (SSH), or `vast` ([Vast.ai](https://vast.ai) on-demand rental) | → `experiment-bridge` → `run-experiment` |
 | `COMPACT` | false | Generate compact summary files for short-context models and session recovery | → all workflows |
 | `REF_PAPER` | false | Reference paper (PDF path or URL) to base ideas on. Summarized first, then used as context | → `idea-discovery` |
 | `ILLUSTRATION` | `gemini` | AI illustration: `gemini` (default), `mermaid` (free), or `false` (skip) | → `paper-writing` |
