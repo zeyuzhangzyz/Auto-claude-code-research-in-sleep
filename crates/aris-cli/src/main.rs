@@ -2822,8 +2822,6 @@ fn build_system_prompt(model_id: Option<&str>) -> Result<Vec<String>, Box<dyn st
     }
 
     // ARIS override: tell the model to use LlmReview instead of Codex MCP for external reviews.
-    // This ensures skills loaded from ~/.claude/skills/ that reference mcp__codex__codex
-    // still work correctly in ARIS, which uses direct API calls instead of MCP.
     prompt.push(
         "IMPORTANT: When a skill instructs you to use `mcp__codex__codex` or `mcp__codex__codex-reply` \
          for external LLM review, use the `LlmReview` tool instead. The LlmReview tool calls \
@@ -2832,7 +2830,48 @@ fn build_system_prompt(model_id: Option<&str>) -> Result<Vec<String>, Box<dyn st
             .to_string(),
     );
 
+    // ARIS persistent memory
+    let memory_path = aris_memory_path();
+    if memory_path.exists() {
+        if let Ok(content) = fs::read_to_string(&memory_path) {
+            if !content.trim().is_empty() {
+                prompt.push(format!(
+                    "# ARIS Persistent Memory\n\
+                     The following is your persistent memory from previous sessions. \
+                     Use this context to provide continuity across conversations.\n\
+                     Memory file: {}\n\n\
+                     {}\n\n\
+                     To update memory, use the write_file tool to write to {}. \
+                     When the user says \"remember this\" or you learn important context \
+                     (research topic, preferences, experiment results), save it to memory.",
+                    memory_path.display(),
+                    content.trim(),
+                    memory_path.display(),
+                ));
+            }
+        }
+    } else {
+        // Tell the model the memory file path even if it doesn't exist yet
+        prompt.push(format!(
+            "# ARIS Persistent Memory\n\
+             You have a persistent memory file at {}. \
+             It does not exist yet. When the user says \"remember this\" or you learn \
+             important context (research topic, paper title, preferences, experiment results), \
+             create and write to this file using the write_file tool. \
+             This memory persists across sessions.",
+            memory_path.display(),
+        ));
+    }
+
     Ok(prompt)
+}
+
+fn aris_memory_path() -> PathBuf {
+    let home = env::var("HOME").unwrap_or_else(|_| ".".into());
+    PathBuf::from(home)
+        .join(".config")
+        .join("aris")
+        .join("memory.md")
 }
 
 fn build_runtime_feature_config(
